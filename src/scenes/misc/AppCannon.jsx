@@ -14,8 +14,8 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon';
 import React, { useEffect, useState } from 'react';
 import { Canvas } from 'react-three-fiber';
-import { useCannon, Provider } from './useCannon';
-import './styles.css';
+import { useCannon, Provider } from '../../useCannon';
+import '../../css/styles.css';
 
 function Plane({ position }) {
   // Register plane as a physics body with zero mass

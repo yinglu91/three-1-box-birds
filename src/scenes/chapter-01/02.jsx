@@ -67,3 +67,5 @@ export default Scene_01_02;
 // https://codesandbox.io/s/react-three-fiber-line2-wireframe-iup24?file=/src/index.js:1274-1283
 // https://dev.to/sanderdebr/let-s-build-3d-procedural-landscape-with-react-and-three-js-47a0
 // https://codeworkshop.dev/blog/2020-04-03-adding-orbit-controls-to-react-three-fiber/
+
+// https://dev.to/saitoeku3/how-to-display-3d-humanoid-avatar-with-react-5db2

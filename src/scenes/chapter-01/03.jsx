@@ -3,52 +3,6 @@ import { Canvas } from 'react-three-fiber';
 import * as THREE from 'three';
 import '../../css/styles.css';
 
-function Sphere(props) {
-  return (
-    <mesh {...props} castShadow={true}>
-      <sphereBufferGeometry attach='geometry' args={[4, 20, 20]} />
-      <meshLambertMaterial attach='material' color={0x7777ff} />
-    </mesh>
-  );
-}
-
-function Cube(props) {
-  return (
-    <mesh {...props} castShadow={true}>
-      <boxBufferGeometry attach='geometry' args={[4, 4, 4]} />
-      <meshLambertMaterial attach='material' color='red' />
-    </mesh>
-  );
-}
-
-function Plane(props) {
-  const mesh = useRef();
-
-  return (
-    <mesh
-      {...props}
-      ref={mesh}
-      rotation-x={-0.5 * Math.PI}
-      position={[15, 0, 0]}
-      receiveShadow={true}
-    >
-      <planeBufferGeometry attach='geometry' args={[60, 20]} />
-      <meshLambertMaterial attach='material' color='#aaaaaa' />
-    </mesh>
-  );
-}
-
-function SpotLight(props) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current.shadow.mapSize = new THREE.Vector2(1024, 1024);
-    ref.current.shadow.camera.far = 130;
-    ref.current.shadow.camera.near = 40;
-  }, []);
-
-  return <spotLight {...props} ref={ref} />;
-}
-
 const Scene_01_03 = () => (
   <>
     <h1>React Three Fiber: Example 01.03 - Materials and light</h1>
@@ -84,6 +38,49 @@ const Scene_01_03 = () => (
 );
 
 export default Scene_01_03;
+
+function SpotLight(props) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current.shadow.mapSize = new THREE.Vector2(1024, 1024);
+    ref.current.shadow.camera.far = 130;
+    ref.current.shadow.camera.near = 40;
+  }, []);
+
+  return <spotLight {...props} ref={ref} />;
+}
+
+function Plane(props) {
+  return (
+    <mesh
+      {...props}
+      rotation-x={-0.5 * Math.PI}
+      position={[15, 0, 0]}
+      receiveShadow={true}
+    >
+      <planeBufferGeometry attach='geometry' args={[60, 20]} />
+      <meshLambertMaterial attach='material' color='#aaaaaa' />
+    </mesh>
+  );
+}
+
+function Cube(props) {
+  return (
+    <mesh {...props} castShadow={true}>
+      <boxBufferGeometry attach='geometry' args={[4, 4, 4]} />
+      <meshLambertMaterial attach='material' color='red' />
+    </mesh>
+  );
+}
+
+function Sphere(props) {
+  return (
+    <mesh {...props} castShadow={true}>
+      <sphereBufferGeometry attach='geometry' args={[4, 20, 20]} />
+      <meshLambertMaterial attach='material' color={0x7777ff} />
+    </mesh>
+  );
+}
 
 // https://codesandbox.io/s/r3f-contact-shadow-jvssp?file=/src/index.js
 

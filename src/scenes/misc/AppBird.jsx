@@ -3,8 +3,8 @@ import { Canvas } from 'react-three-fiber';
 
 import './styles.css';
 
-import Jumbo from './components/Jumbo';
-import Birds from './components/Birds';
+import Jumbo from '../../components/Jumbo';
+import Birds from '../../components/Birds';
 
 const App = () => {
   return (

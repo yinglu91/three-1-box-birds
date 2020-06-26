@@ -9,9 +9,9 @@ import ReactDOM from 'react-dom';
 
 // import Scene from './scenes/app1/App';
 
-import Scene from './scenes/chapter-01/02';
+// import Scene from './scenes/chapter-01/02';
 // import Scene from './scenes/chapter-01/03';
-// import Scene from './scenes/chapter-01/04';
+import Scene from './scenes/chapter-01/04';
 
 ReactDOM.render(<Scene />, document.getElementById('root'));
 

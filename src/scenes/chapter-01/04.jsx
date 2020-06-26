@@ -9,7 +9,6 @@ const Scene_01_04 = () => (
 
     <Canvas
       colorManagement
-      gl={{ alpha: false, antialias: true, shadowMap: true }}
       camera={{
         fov: 45,
         aspect: window.innerWidth / window.innerHeight,
@@ -18,7 +17,9 @@ const Scene_01_04 = () => (
         position: [-30, 40, 30],
       }}
       onCreated={({ gl }) => {
-        gl.setClearColor(0x000000);
+        gl.setClearColor(new THREE.Color(0x000000));
+        gl.setSize(window.innerWidth, window.innerHeight);
+        gl.shadowMap.enabled = true;
       }}
     >
       <ambientLight args={[0x353535]} />
@@ -66,13 +67,8 @@ function Plane(props) {
 
 function Cube(props) {
   const mesh = useRef();
-  const { gl } = useThree();
 
   useFrame(() => {
-    gl.setClearColor(new THREE.Color(0x000000));
-    gl.setSize(window.innerWidth, window.innerHeight);
-    gl.shadowMap.enabled = true;
-
     // rotate the cube around its axes
     mesh.current.rotation.x += 0.02;
     mesh.current.rotation.y += 0.02;
@@ -80,7 +76,7 @@ function Cube(props) {
   });
 
   return (
-    <mesh {...props} castShadow={true} ref={mesh}>
+    <mesh {...props} castShadow ref={mesh}>
       <boxBufferGeometry attach='geometry' args={[4, 4, 4]} />
       <meshLambertMaterial attach='material' color='red' />
     </mesh>
@@ -109,3 +105,4 @@ function Sphere(props) {
 // https://codesandbox.io/s/r3f-contact-shadow-jvssp?file=/src/index.js
 
 // https://codespots.com/library/item/2280
+// https://github.com/react-spring/react-three-fiber#readme

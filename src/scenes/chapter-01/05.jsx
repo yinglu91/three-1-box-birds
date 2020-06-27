@@ -2,45 +2,63 @@ import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from 'react-three-fiber';
 import * as THREE from 'three';
 import { Stats } from 'drei';
+import { Controls, useControl } from 'react-three-gui';
 import '../../css/styles.css';
 
-const Scene_01_04 = () => (
-  <>
-    {/* <h1>React Three Fiber: Example 01.04 - Materials, light and animation</h1> */}
+const Scene_01_05 = () => {
+  const rotationSpeed = useControl('rotationSpeed', {
+    type: 'number',
+    min: 0,
+    max: 0.15,
+    value: 0.05,
+  });
+  const bouncingSpeed = useControl('bouncingSpeed', {
+    type: 'number',
+    min: 0,
+    max: 0.15,
+    value: 0.05,
+  });
 
-    <Canvas
-      colorManagement
-      camera={{
-        fov: 45,
-        aspect: window.innerWidth / window.innerHeight,
-        near: 0.1,
-        far: 1000,
-        position: [-30, 40, 30],
-      }}
-      onCreated={({ gl }) => {
-        gl.setClearColor(new THREE.Color(0x000000));
-        gl.setSize(window.innerWidth, window.innerHeight);
-        gl.shadowMap.enabled = true;
-      }}
-    >
-      <ambientLight args={[0x353535]} />
-      <SpotLight
-        position={[-40, 40, -15]}
-        args={[0xffffff]}
-        castShadow={true}
-      />
+  return (
+    <>
+      <h1>React Three Fiber: Example 01.05 - Control gui</h1>
 
-      <Plane />
-      <Cube position={[-4, 3, 0]} />
-      <Sphere position={[20, 4, 2]} />
+      <Canvas
+        colorManagement
+        camera={{
+          fov: 45,
+          aspect: window.innerWidth / window.innerHeight,
+          near: 0.1,
+          far: 1000,
+          position: [-30, 40, 30],
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(new THREE.Color(0x000000));
+          gl.setSize(window.innerWidth, window.innerHeight);
+          gl.shadowMap.enabled = true;
+        }}
+      >
+        <ambientLight args={[0x353535]} />
+        <SpotLight
+          position={[-40, 40, -15]}
+          args={[0xffffff]}
+          castShadow={true}
+        />
 
-      <axesHelper args={[20]} />
-      <Stats />
-    </Canvas>
-  </>
-);
+        <Plane />
+        <Cube position={[-4, 3, 0]} rotationSpeed={rotationSpeed} />
+        <Sphere position={[20, 4, 2]} bouncingSpeed={bouncingSpeed} />
 
-export default Scene_01_04;
+        <axesHelper args={[20]} />
+        <Stats />
+      </Canvas>
+
+      <Controls />
+    </>
+  );
+};
+
+export default Scene_01_05;
 
 function SpotLight(props) {
   const ref = useRef();
@@ -72,9 +90,9 @@ function Cube(props) {
 
   useFrame(() => {
     // rotate the cube around its axes
-    mesh.current.rotation.x += 0.02;
-    mesh.current.rotation.y += 0.02;
-    mesh.current.rotation.z += 0.02;
+    mesh.current.rotation.x += props.rotationSpeed;
+    mesh.current.rotation.y += props.rotationSpeed;
+    mesh.current.rotation.z += props.rotationSpeed;
   });
 
   return (
@@ -91,7 +109,7 @@ function Sphere(props) {
   let step = 0;
   useFrame(() => {
     // bounce the sphere up and down
-    step += 0.04;
+    step += props.bouncingSpeed;
     mesh.current.position.x = 20 + 10 * Math.cos(step);
     mesh.current.position.y = 2 + 10 * Math.abs(Math.sin(step));
   });
@@ -108,3 +126,7 @@ function Sphere(props) {
 
 // https://codespots.com/library/item/2280
 // https://github.com/react-spring/react-three-fiber#readme
+
+// gui ??
+// https://github.com/ueno-llc/react-three-gui/blob/master/README.md
+// https://github.com/claus/react-dat-gui

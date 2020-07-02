@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Canvas } from 'react-three-fiber';
 
-import './styles.css';
+import '../../css/styles.css';
 
 import Jumbo from '../../components/Jumbo';
 import Birds from '../../components/Birds';

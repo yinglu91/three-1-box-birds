@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Canvas, useFrame, useThree } from 'react-three-fiber';
 import * as THREE from 'three';
 import { Stats } from 'drei';
 import { Controls, useControl } from 'react-three-gui';
+
 import '../../css/styles.css';
 
 const Scene_01_05 = () => {
@@ -16,12 +18,16 @@ const Scene_01_05 = () => {
     type: 'number',
     min: 0,
     max: 0.15,
-    value: 0.05,
+    value: 0.01,
   });
 
   return (
     <>
-      <h1>React Three Fiber: Example 01.05 - Control gui</h1>
+      <Helmet>
+        <title>R3F 01.05 - Control gui</title>
+      </Helmet>
+
+      {/* <h1>React Three Fiber: Example 01.05 - Control gui</h1> */}
 
       <Canvas
         colorManagement

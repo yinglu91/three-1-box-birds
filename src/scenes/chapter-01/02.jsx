@@ -43,7 +43,7 @@ function Cube(props) {
   return (
     <mesh {...props}>
       <boxBufferGeometry attach='geometry' args={[4, 4, 4]} />
-      <meshStandardMaterial attach='material' color='red' wireframe={true} />
+      <meshStandardMaterial attach='material' color='red' wireframe />
     </mesh>
   );
 }

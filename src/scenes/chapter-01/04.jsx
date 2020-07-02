@@ -4,41 +4,41 @@ import * as THREE from 'three';
 import { Stats } from 'drei';
 import '../../css/styles.css';
 
-const Scene_01_04 = () => (
-  <>
-    {/* <h1>React Three Fiber: Example 01.04 - Materials, light and animation</h1> */}
+const Scene_01_04 = () => {
+  const statRef = useRef();
 
-    <Canvas
-      colorManagement
-      camera={{
-        fov: 45,
-        aspect: window.innerWidth / window.innerHeight,
-        near: 0.1,
-        far: 1000,
-        position: [-30, 40, 30],
-      }}
-      onCreated={({ gl }) => {
-        gl.setClearColor(new THREE.Color(0x000000));
-        gl.setSize(window.innerWidth, window.innerHeight);
-        gl.shadowMap.enabled = true;
-      }}
-    >
-      <ambientLight args={[0x353535]} />
-      <SpotLight
-        position={[-40, 40, -15]}
-        args={[0xffffff]}
-        castShadow={true}
-      />
+  return (
+    <>
+      {/* <h1>React Three Fiber: Example 01.04 - Materials, light and animation</h1> */}
 
-      <Plane />
-      <Cube position={[-4, 3, 0]} />
-      <Sphere position={[20, 4, 2]} />
+      <Canvas
+        colorManagement
+        camera={{
+          fov: 45,
+          aspect: window.innerWidth / window.innerHeight,
+          near: 0.1,
+          far: 1000,
+          position: [-30, 40, 30],
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(new THREE.Color(0x000000));
+          gl.setSize(window.innerWidth, window.innerHeight);
+          gl.shadowMap.enabled = true;
+        }}
+      >
+        <ambientLight args={[0x353535]} />
+        <SpotLight position={[-40, 40, -15]} args={[0xffffff]} castShadow />
 
-      <axesHelper args={[20]} />
-      <Stats />
-    </Canvas>
-  </>
-);
+        <Plane />
+        <Cube position={[-4, 3, 0]} />
+        <Sphere position={[20, 4, 2]} />
+
+        <axesHelper args={[20]} />
+        <Stats />
+      </Canvas>
+    </>
+  );
+};
 
 export default Scene_01_04;
 
@@ -97,7 +97,7 @@ function Sphere(props) {
   });
 
   return (
-    <mesh {...props} castShadow={true} ref={mesh}>
+    <mesh {...props} castShadow ref={mesh}>
       <sphereBufferGeometry attach='geometry' args={[4, 20, 20]} />
       <meshLambertMaterial attach='material' color={0x7777ff} />
     </mesh>
